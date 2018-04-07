@@ -18,6 +18,8 @@ public class Task extends BaseJsonObject implements Cloneable,Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
+	private long id;
+	private long parentid;
 	private String topic;
 	private String title;
 	private String desc;
@@ -31,6 +33,18 @@ public class Task extends BaseJsonObject implements Cloneable,Serializable{
 	private long deadline;
 	private TaskState state;
 	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public long getParentid() {
+		return parentid;
+	}
+	public void setParentid(long parentid) {
+		this.parentid = parentid;
+	}
 	public long getRecordtime() {
 		return recordtime;
 	}
