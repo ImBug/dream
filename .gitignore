@@ -1,0 +1,15 @@
+/.settings
+/.project
+*.project
+*.class
+/temp/*
+*.log
+*.jar
+*.classpath
+*.settings
+*.gz
+.idea
+/**/*.iml
+.DS_Store
+*.json
+/**/target/
