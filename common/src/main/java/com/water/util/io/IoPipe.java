@@ -21,6 +21,12 @@ public class IoPipe implements Runnable{
 	private byte[] buffer = new byte[1024];
 	private ReadOutEventListener listener;
 	
+	public IoPipe(InputStream in, OutputStream out) {
+		super();
+		this.in = in;
+		this.out = out;
+	}
+
 	@Override
 	public void run() {
 		if(in == null || out == null) {
@@ -34,12 +40,15 @@ public class IoPipe implements Runnable{
 				}else {
 					try {
 						fireOn(new ReadOutEvent(in,out));
+						return ;
 					} catch (Exception e) {
 						logger.error("event deal error",e);
 					}
 				}
 			} catch (IOException e) {
-				logger.error("read IO error",e);
+				logger.error("read IO error,read out",e);
+				fireOn(new ReadOutEvent(in,out));
+				return;
 			}
 		}
 		try {
@@ -64,4 +73,21 @@ public class IoPipe implements Runnable{
 	private void fireOn(ReadOutEvent event) {
 		if(listener != null)listener.dowith(event);
 	}
+
+	public InputStream getIn() {
+		return in;
+	}
+
+	public OutputStream getOut() {
+		return out;
+	}
+
+	public void setListener(ReadOutEventListener listener) {
+		this.listener = listener;
+	}
+
+	public void setLogger(Logger logger) {
+		this.logger = logger;
+	}
+	
 }
